@@ -3,14 +3,18 @@ import "../styles/global.css";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
 import MobileMenu from "./MobileMenu.astro";
+import SEO from "../components/Seo.astro";
 ---
 
 <html lang="es">
 <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="/logo_ag.png" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Angel Gala</title>
+    <SEO
+            title="Angel Gala - Diseñador & Desarrollador Web"
+            description="Creando experiencias digitales que conectan, impactan y resuelven. Especializado en diseño UI/UX y desarrollo front-end."
+            image="/og-image.jpg"
+            url="https://angelgala.com"
+            keywords="diseñador web, desarrollador front-end, UI/UX, React, Tailwind CSS, portfolio"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
