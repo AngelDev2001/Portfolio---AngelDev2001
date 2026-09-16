@@ -11,16 +11,15 @@ interface Props {
 }
 
 const {
-    title = "Ángel Gala - Diseñador & Desarrollador Web",
+    title = "Angel Emilio Gala Flores - Desarrollador Web",
     description = "Creando experiencias digitales que conectan, impactan y resuelven. Especializado en diseño UI/UX y desarrollo front-end con React, Tailwind CSS y Astro.",
-    image = "/og-image.jpg", // Asegúrate de crear esta imagen
-    url = "https://angelgala.com", // Cambia por tu URL
+    image = "/og-image.jpg",
+    url = "https://angelgala.com",
     type = "website",
-    author = "Ángel Gala",
-    keywords = "diseñador web, desarrollador front-end, UI/UX, React, Tailwind CSS, portfolio, Astro"
+    author = "Angel Gala",
+    keywords = "desarrollador front-end, UI/UX, React, Tailwind CSS, portfolio, Astro"
 } = Astro.props;
 
-// URL completa de la imagen (debe ser absoluta para Open Graph)
 const imageUrl = image.startsWith('http') ? image : `${url}${image}`;
 ---
 
@@ -56,7 +55,7 @@ const imageUrl = image.startsWith('http') ? image : `${url}${image}`;
 <meta name="msapplication-TileColor" content="#000000" />
 
 <!-- Favicon (agrega estos archivos a tu carpeta public/) -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="/favicon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
