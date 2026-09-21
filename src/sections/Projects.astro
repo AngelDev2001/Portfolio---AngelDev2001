@@ -1,89 +1,126 @@
 ---
-// Projects.astro
-const projects = [
-    {
-        title: "Rediseño App de Finanzas",
-        description: "Un rediseño centrado en el usuario para una aplicación de finanzas personales, mejorando la usabilidad y la claridad visual.",
-        image: "/projects/finance-app.jpg",
-        tags: ["UX/UI Design", "Mobile", "Fintech"]
-    },
-    {
-        title: "Plataforma de E-learning",
-        description: "Diseño y desarrollo de una plataforma interactiva para cursos online, enfocada en la gamificación y el compromiso del estudiante.",
-        image: "/projects/elearning.jpg",
-        tags: ["Web Design", "React", "Education"]
-    },
-    {
-        title: "Dashboard de Analítica",
-        description: "Creación de un dashboard intuitivo para la visualización de datos complejos en tiempo real, facilitando la toma de decisiones.",
-        image: "/projects/dashboard.jpg",
-        tags: ["Data Viz", "Dashboard", "Analytics"]
-    }
+import ContentWidth from "../components/ContentWidth.astro";
+import CodeXml from "lucide-astro/CodeXml";
+
+const TAG_ICONS: Record<string, string> = {
+  React: "/icons/react_dark.svg",
+  "Next.js": "/icons/nextjs_icon_dark.svg",
+  "Tailwind CSS": "/icons/tailwindcss.svg",
+  TypeScript: "/icons/typescript.svg",
+  Astro: "/icons/astro-icon-dark.svg",
+  "Node.js": "/icons/nodejs.svg",
+};
+
+const PROYECTOS = [
+  {
+    title: "Korekenke — Sistema de Gestión y Convenios",
+    entity: "JBIENE - Ejército del Perú",
+    description:
+      "Plataforma web empresarial desarrollada para la digitalización integral de solicitudes de convenios y descuentos corporativos. Permite la gestión centralizada de trámites sin atención presencial e integra alertas automatizadas.",
+    image: "/projects/korekenke.png",
+    tags: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
+    highlights: [
+      "Digitalización completa de procesos y trámites presenciales para miles de usuarios.",
+      "Integración de sistema de notificaciones omnicanal vía Email y WhatsApp.",
+      "Módulos de administración para control de roles, permisos y accesos.",
+    ],
+  },
+  {
+    title: "Platform Servitec — Hub Corporativo Centralizado",
+    entity: "Servitec Peru Group E.I.R.L.",
+    description:
+      "Ecosistema web diseñado para consolidar e interconectar interacciones de usuarios desde múltiples sitios web corporativos en una sola interfaz en tiempo real.",
+    image: "/projects/platform-servitec.png",
+    tags: ["React", "Tailwind CSS", "Node.js"],
+    highlights: [
+      "Centralización de formularios de contacto, cotizaciones y libro de reclamaciones.",
+      "Módulo interno de control de asistencias y gestión de proveedores.",
+      "Refactorización del código base, mejorando la velocidad de carga y el UI/UX.",
+    ],
+  },
 ];
 ---
 
-<section id="proyectos" class="min-h-screen bg-black py-20 px-6">
-    <div class="container mx-auto max-w-7xl">
-        <!-- Header -->
-        <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
-                Proyectos Destacados
-            </h2>
-            <p class="text-gray-400 text-lg max-w-3xl mx-auto">
-                Una selección de trabajos que demuestran mi pasión por el diseño y la experiencia de usuario.
-            </p>
-        </div>
+<section
+  id="proyectos"
+  class="py-16 md:py-24 border-t border-neutral-200 dark:border-neutral-900"
+>
+  <ContentWidth>
+    <div class="max-w-3xl space-y-12">
+      <div class="space-y-2">
+        <h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight">
+          Proyectos Destacados
+        </h2>
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">
+          Sistemas empresariales desarrollados con enfoque en rendimiento,
+          arquitectura limpia y usabilidad.
+        </p>
+      </div>
 
-        <!-- Projects Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-                    <div class="group relative bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 hover:border-yellow-600/50 transition-all duration-300">
-                        <!-- Project Image -->
-                        <div class="relative h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 overflow-hidden">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <!-- Placeholder para la imagen del proyecto -->
-                                <div class="w-full h-full bg-zinc-800 flex items-center justify-center">
-                                    <svg class="w-20 h-20 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <!-- Overlay on hover -->
-                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span class="text-white font-semibold text-lg">Ver Proyecto</span>
-                            </div>
-                        </div>
-
-                        <!-- Project Info -->
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold text-white mb-3">
-                                {project.title}
-                            </h3>
-                            <p class="text-gray-400 mb-4 line-clamp-3">
-                                {project.description}
-                            </p>
-
-                            <!-- Tags -->
-                            <div class="flex flex-wrap gap-2">
-                                {project.tags.map((tag) => (
-                                        <span class="px-3 py-1 bg-zinc-800 text-gray-300 text-xs rounded-full">
-                  {tag}
+      <div class="space-y-16">
+        {PROYECTOS.map((project) => (
+          <article class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start pt-8 border-t border-neutral-200 dark:border-neutral-900 first:border-t-0 first:pt-0">
+            <div class="md:col-span-5 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800/60 aspect-video md:aspect-[4/3] flex items-center justify-center">
+              <img
+                src={project.image}
+                alt={`Captura de ${project.title}`}
+                class="w-full h-full object-cover"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+              <div class="hidden w-full h-full p-6 flex-col justify-between bg-neutral-50 dark:bg-neutral-950">
+                <span class="text-xs font-semibold text-brand-red uppercase tracking-wider">
+                  {project.entity}
                 </span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-            ))}
-        </div>
+                <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-300">
+                  {project.title}
+                </p>
+              </div>
+            </div>
 
-        <!-- CTA -->
-        <div class="text-center mt-16">
-            <a
-                    href="#contacto"
-                    class="inline-block px-8 py-4 bg-yellow-600 hover:bg-yellow-700 text-black font-semibold rounded-full transition-all duration-300 transform hover:scale-105"
-            >
-                Ver Todos los Proyectos
-            </a>
-        </div>
+            <div class="md:col-span-7 space-y-4">
+              <div>
+                <span class="text-xs font-semibold text-brand-red uppercase tracking-wide">
+                  {project.entity}
+                </span>
+                <h3 class="text-xl font-bold text-neutral-900 dark:text-white leading-snug mt-1">
+                  {project.title}
+                </h3>
+              </div>
+
+              <p class="text-neutral-700 dark:text-neutral-300 text-sm sm:text-base leading-relaxed">
+                {project.description}
+              </p>
+
+              <ul class="space-y-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+                {project.highlights.map((highlight) => (
+                  <li class="flex items-start gap-2.5">
+                    <CodeXml class="w-4 h-4 text-neutral-400 dark:text-neutral-500 shrink-0 mt-0.5" />
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                {project.tags.map((tag) => {
+                  const iconPath = TAG_ICONS[tag];
+                  return (
+                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-900 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800/90 shadow-sm">
+                      {iconPath && (
+                        <img
+                          src={iconPath}
+                          alt={`Icono de ${tag}`}
+                          class="w-3.5 h-3.5 object-contain"
+                        />
+                      )}
+                      <span>{tag}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
+  </ContentWidth>
 </section>

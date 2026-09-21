@@ -1,63 +1,85 @@
 ---
-// SEO.astro - Componente para meta tags de Open Graph y SEO
 interface Props {
-    title?: string;
-    description?: string;
-    image?: string;
-    url?: string;
-    type?: string;
-    author?: string;
-    keywords?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  type?: string;
+  author?: string;
+  keywords?: string;
 }
 
 const {
-    title = "Angel Emilio Gala Flores - Desarrollador Web",
-    description = "Creando experiencias digitales que conectan, impactan y resuelven. Especializado en diseño UI/UX y desarrollo front-end con React, Tailwind CSS y Astro.",
-    image = "/og-image.jpg",
-    url = "https://angelgala.com",
-    type = "website",
-    author = "Angel Gala",
-    keywords = "desarrollador front-end, UI/UX, React, Tailwind CSS, portfolio, Astro"
+  title = "Angel Gala — Desarrollador Full-Stack & Líder Técnico",
+  description = "Desarrollador Full-Stack y Líder Técnico con +3 años de experiencia en Lima, Perú. Especializado en React, Next.js, Astro y TypeScript para sistemas empresariales.",
+  image = "/og-image.png",
+  url = "https://angelgala.com",
+  type = "website",
+  author = "Angel Gala",
+  keywords = "Angel Gala, Angel Emilio Gala Flores, desarrollador full stack, desarrollador web lima, desarrollador front-end peru, líder técnico, React, Next.js, Astro, Tailwind CSS, TypeScript, Node.js, portafolio desarrollador web",
 } = Astro.props;
 
-const imageUrl = image.startsWith('http') ? image : `${url}${image}`;
+const imageUrl = image.startsWith("http") ? image : `${url}${image}`;
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Angel Emilio Gala Flores",
+  alternateName: "Angel Gala",
+  url: url,
+  jobTitle: "Desarrollador Full-Stack & Líder Técnico",
+  worksFor: {
+    "@type": "Organization",
+    name: "Servitec Peru Group E.I.R.L.",
+  },
+  sameAs: [
+    "https://www.linkedin.com/in/angel-emilio-gala-flores",
+    "https://github.com/AngelDev2001",
+  ],
+  knowsAbout: [
+    "React",
+    "Next.js",
+    "Astro",
+    "Tailwind CSS",
+    "TypeScript",
+    "Node.js",
+    "Web Development",
+  ],
+};
 ---
 
-<!-- Meta Tags Básicos -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href={url} />
 
-<!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
 <meta property="og:url" content={url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
 <meta property="og:image:alt" content={title} />
-<meta property="og:site_name" content="Ángel Gala Portfolio" />
-<meta property="og:locale" content="es_ES" />
+<meta property="og:site_name" content="Angel Gala Portfolio" />
+<meta property="og:locale" content="es_PE" />
 
-<!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={url} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={imageUrl} />
-<meta name="twitter:creator" content="@tuusuario" /> <!-- Cambia por tu usuario de Twitter -->
 
-<!-- Información adicional -->
-<meta name="theme-color" content="#000000" />
-<meta name="msapplication-TileColor" content="#000000" />
+<meta name="theme-color" content="#0a0a0a" />
 
-<!-- Favicon (agrega estos archivos a tu carpeta public/) -->
 <link rel="icon" type="image/x-icon" href="/favicon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
-<title>{title}</title>
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(schemaData)}
+></script>

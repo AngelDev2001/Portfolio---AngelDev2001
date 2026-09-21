@@ -2,57 +2,40 @@
 import "../styles/global.css";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
-import MobileMenu from "./MobileMenu.astro";
 import SEO from "../components/Seo.astro";
+import WhatsappButton from "../components/WhatsappButton.astro";
+import SpotifyWidget from "../components/SpotifyWidget.astro";
 ---
 
 <html lang="es">
-<head>
+  <head>
     <SEO
-            title="Angel Emilio Gala Flores - Desarrollador Web"
-            description="Creando experiencias digitales que conectan, impactan y resuelven. Especializado en diseño UI/UX y desarrollo front-end."
-            image="/og-image.jpg"
-            url="https://angelgala.com"
-            keywords="diseñador web, desarrollador front-end, UI/UX, React, Tailwind CSS, portfolio"
+      title="Angel Gala — Desarrollador Full-Stack & Líder Técnico"
+      description="+3 años de experiencia construyendo plataformas web rápidas y escalables en Lima, Perú. Especializado en React, Next.js, Astro y TypeScript."
+      url="https://angelgala.com"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script is:inline>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "system";
+        const systemDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
 
-    <style>
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        if (savedTheme === "dark" || (savedTheme === "system" && systemDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
         }
+      })();
+    </script>
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
 
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Personalización del scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #3f3f46;
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ca8a04;
-        }
-    </style>
-</head>
-<body>
-<Header/>
-<MobileMenu/>
-<slot/>
-<Footer/>
-</body>
+    <SpotifyWidget />
+    <WhatsappButton />
+  </body>
 </html>
