@@ -1,5 +1,5 @@
 {
-  "name": "portfolio---angeldev2001",
+  "name": "my-portfolio-angelgala",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -9,8 +9,15 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource-variable/onest": "^5.3.1",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^7.3.2",
+    "lucide-astro": "^0.556.0",
     "tailwindcss": "^4.1.16"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.8",
+    "prettier-plugin-astro": "^1.0.1",
+    "prettier-plugin-tailwindcss": "^0.8.1"
   }
 }
