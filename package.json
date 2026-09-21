@@ -12,10 +12,12 @@
     "@fontsource-variable/onest": "^5.3.1",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^7.3.2",
+    "canvas-confetti": "^1.9.4",
     "lucide-astro": "^0.556.0",
     "tailwindcss": "^4.1.16"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "prettier": "^3.9.8",
     "prettier-plugin-astro": "^1.0.1",
     "prettier-plugin-tailwindcss": "^0.8.1"

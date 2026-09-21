@@ -1,0 +1,404 @@
+---
+// src/components/FloresAmarillas.astro
+import { Heart, Sparkles, Mail, Volume2, VolumeX, RefreshCw, Edit3 } from 'lucide-astro';
+
+interface Props {
+    nombreInicial?: string;
+    mensajeInicial?: string;
+}
+
+const {
+    nombreInicial = "Para Alguien Especial",
+    mensajeInicial = "Que estas flores amarillas iluminen tu día tanto como tú iluminas el de los demás. ✨🌻"
+} = Astro.props;
+---
+
+<div class="relative w-full h-screen overflow-hidden bg-[#0a0a0f] text-slate-100 font-sans select-none">
+    <!-- 1. CANVA DE FONDO (PARTÍCULAS Y PÉTALOS) -->
+    <canvas id="bg-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
+
+    <!-- AMBIENTE DE LUZ REGLA "DARK TECH / GLOW" -->
+    <div class="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_50%,rgba(250,204,21,0.08),transparent_70%)] pointer-events-none"></div>
+
+    <!-- CONTENEDOR PRINCIPAL INTERACTIVO -->
+    <main class="relative z-10 w-full h-full flex flex-col items-center justify-between p-4 md:p-8">
+
+        <!-- HEADER: TÍTULO Y NOMBRE PERSONALIZABLE -->
+        <header class="text-center mt-2 md:mt-4 z-20 flex flex-col items-center gap-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs tracking-wider uppercase backdrop-blur-md animate-pulse">
+                <Sparkles class="w-3.5 h-3.5 text-amber-400" />
+                <span>Detalle Especial</span>
+            </div>
+
+            <div class="group relative flex items-center justify-center gap-2">
+                <h1 id="recipient-name" class="text-3xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 via-amber-300 to-yellow-500 drop-shadow-[0_2px_10px_rgba(245,158,11,0.3)]">
+                    {nombreInicial}
+                </h1>
+                <button id="btn-edit-name" title="Editar nombre" class="opacity-40 hover:opacity-100 transition-opacity p-1 text-amber-300">
+                    <Edit3 class="w-4 h-4" />
+                </button>
+            </div>
+            <p class="text-xs md:text-sm text-slate-400 max-w-xs md:max-w-md">Haz clic en la tarjetita o en el ramo para descubrir la sorpresa</p>
+        </header>
+
+        <!-- ÁREA CENTRAL: RAMO DE GIRASOLES E INTERACCIÓN -->
+        <div class="relative flex-1 w-full max-w-2xl flex items-center justify-center">
+
+            <!-- GLOW DEL RAMO -->
+            <div class="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-amber-500/15 blur-3xl -z-10 animate-pulse"></div>
+
+            <!-- ESTRUCTURA DEL RAMO DE GIRASOLES (SVG ARTESANAL E INTERACTIVO) -->
+            <div id="bouquet-container" class="relative cursor-pointer transform hover:scale-105 transition-transform duration-500 ease-out flex items-center justify-center">
+
+                <svg class="w-[280px] h-[360px] md:w-[380px] md:h-[480px] drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)]" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="sun-center" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#422006" />
+                            <stop offset="70%" stop-color="#78350f" />
+                            <stop offset="100%" stop-color="#291003" />
+                        </radialGradient>
+
+                        <linearGradient id="petal-grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#fef08a" />
+                            <stop offset="50%" stop-color="#facc15" />
+                            <stop offset="100%" stop-color="#eab308" />
+                        </linearGradient>
+
+                        <linearGradient id="petal-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#fde047" />
+                            <stop offset="100%" stop-color="#ca8a04" />
+                        </linearGradient>
+
+                        <linearGradient id="wrap-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#1e293b" />
+                            <stop offset="100%" stop-color="#0f172a" />
+                        </linearGradient>
+
+                        <filter id="glow-effect" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="4" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+
+                    <!-- PAPEL ENVOLTURA DEL RAMO -->
+                    <path d="M 120 280 L 200 470 L 280 280 L 320 200 L 80 200 Z" fill="url(#wrap-grad)" stroke="#334155" stroke-width="2" />
+                    <path d="M 110 210 L 200 470 L 290 210" fill="none" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+                    <!-- HOJAS DE EUCALIPTO / FOLLAJE DE FONDO -->
+                    <g opacity="0.9">
+                        <path d="M 100 180 Q 50 140 70 90 Q 110 130 110 170 Z" fill="#15803d"/>
+                        <path d="M 300 180 Q 350 140 330 90 Q 290 130 290 170 Z" fill="#166534"/>
+                        <path d="M 150 120 Q 120 50 170 40 Q 180 90 160 130 Z" fill="#22c55e"/>
+                        <path d="M 250 120 Q 280 50 230 40 Q 220 90 240 130 Z" fill="#15803d"/>
+                    </g>
+
+                    <!-- GIRASOL SECUNDARIO IZQUIERDO -->
+                    <g transform="translate(130, 160) scale(0.75)">
+                        <!-- Pétalos -->
+                        <g>
+                            {Array.from({ length: 16 }).map((_, i) => (
+                                    <path
+                                            d="M 0 0 C -12 -30 -8 -60 0 -75 C 8 -60 12 -30 0 0"
+                                            fill="url(#petal-grad-2)"
+                                            transform={`rotate(${i * (360 / 16)})`}
+                                    />
+                            ))}
+                        </g>
+                        <!-- Centro -->
+                        <circle cx="0" cy="0" r="28" fill="url(#sun-center)" stroke="#a16207" stroke-width="2" />
+                    </g>
+
+                    <!-- GIRASOL SECUNDARIO DERECHO -->
+                    <g transform="translate(270, 160) scale(0.75)">
+                        <g>
+                            {Array.from({ length: 16 }).map((_, i) => (
+                                    <path
+                                            d="M 0 0 C -12 -30 -8 -60 0 -75 C 8 -60 12 -30 0 0"
+                                            fill="url(#petal-grad-2)"
+                                            transform={`rotate(${i * (360 / 16)})`}
+                                    />
+                            ))}
+                        </g>
+                        <circle cx="0" cy="0" r="28" fill="url(#sun-center)" stroke="#a16207" stroke-width="2" />
+                    </g>
+
+                    <!-- GIRASOL PRINCIPAL CENTRO -->
+                    <g transform="translate(200, 130)" filter="url(#glow-effect)">
+                        <!-- Pétalos Capa Trasera -->
+                        <g transform="rotate(10)">
+                            {Array.from({ length: 20 }).map((_, i) => (
+                                    <path
+                                            d="M 0 0 C -15 -35 -10 -75 0 -90 C 10 -75 15 -35 0 0"
+                                            fill="#eab308"
+                                            transform={`rotate(${i * (360 / 20)})`}
+                                    />
+                            ))}
+                        </g>
+                        <!-- Pétalos Capa Frontal -->
+                        <g>
+                            {Array.from({ length: 20 }).map((_, i) => (
+                                    <path
+                                            d="M 0 0 C -14 -30 -8 -68 0 -82 C 8 -68 14 -30 0 0"
+                                            fill="url(#petal-grad-1)"
+                                            transform={`rotate(${i * (360 / 20)})`}
+                                    />
+                            ))}
+                        </g>
+                        <!-- Centro con textura semillero -->
+                        <circle cx="0" cy="0" r="36" fill="url(#sun-center)" stroke="#ca8a04" stroke-width="2" />
+                        <circle cx="0" cy="0" r="30" fill="none" stroke="#a16207" stroke-width="1.5" stroke-dasharray="3 3"/>
+                        <circle cx="0" cy="0" r="20" fill="none" stroke="#78350f" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    </g>
+
+                    <!-- LAZO / CINTA ROJA DE SEDA -->
+                    <g transform="translate(200, 310)">
+                        <!-- Caídas del lazo -->
+                        <path d="M -5 10 C -20 40 -40 70 -50 100 C -30 95 -15 80 0 20 Z" fill="#dc2626" />
+                        <path d="M 5 10 C 20 40 40 70 50 100 C 30 95 15 80 0 20 Z" fill="#b91c1c" />
+                        <!-- Orejas del lazo -->
+                        <path d="M 0 0 C -30 -25 -50 -5 -20 10 Z" fill="#ef4444" />
+                        <path d="M 0 0 C 30 -25 50 -5 20 10 Z" fill="#dc2626" />
+                        <!-- Nudo central -->
+                        <rect x="-10" y="-8" width="20" height="16" rx="4" fill="#991b1b" />
+                    </g>
+                </svg>
+
+                <!-- TARJETITA ADHERIDA AL RAMO -->
+                <button id="btn-card" class="absolute bottom-16 md:bottom-20 z-20 group flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900/90 border border-amber-500/40 text-amber-200 shadow-2xl backdrop-blur-md hover:border-amber-400 hover:scale-110 transition-all duration-300">
+                    <Mail class="w-4 h-4 text-amber-400 group-hover:rotate-12 transition-transform" />
+                    <span class="text-xs md:text-sm font-semibold tracking-wide">Abrir Tarjeta</span>
+                    <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+          </span>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- FOOTER: CONTROLES DE INTERACCIÓN -->
+        <footer class="z-20 flex items-center justify-center gap-4 mb-2">
+            <button id="btn-spawn-petals" class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/80 border border-slate-700/60 text-slate-300 text-xs hover:border-amber-500/50 hover:text-amber-300 transition-all backdrop-blur-md">
+                <Sparkles class="w-3.5 h-3.5 text-amber-400" />
+                <span>Lluvia de Flores</span>
+            </button>
+        </footer>
+    </main>
+
+    <!-- 2. MODAL CARTA INTERACTIVA 3D -->
+    <div id="card-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+        <div class="relative w-full max-w-md bg-slate-900 border border-amber-500/30 rounded-2xl p-6 md:p-8 shadow-[0_0_50px_rgba(245,158,11,0.2)] transform scale-90 transition-transform duration-300" id="card-modal-content">
+
+            <!-- BOTÓN CERRAR -->
+            <button id="btn-close-card" class="absolute top-4 right-4 p-1.5 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors">
+                ✕
+            </button>
+
+            <!-- DECORACIÓN CARTA -->
+            <div class="flex items-center gap-2 text-amber-400 mb-4">
+                <Heart class="w-5 h-5 fill-amber-400/20" />
+                <span class="text-xs font-bold uppercase tracking-widest text-amber-300/80">Mensaje Especial</span>
+            </div>
+
+            <!-- CONTENIDO DE LA CARTA -->
+            <h3 id="card-title" class="text-xl md:text-2xl font-bold text-slate-100 mb-3">
+                {nombreInicial}
+            </h3>
+
+            <div class="relative pl-4 border-l-2 border-amber-500/40 my-4 py-1">
+                <p id="card-text" class="text-slate-300 text-sm md:text-base leading-relaxed italic">
+                    "{mensajeInicial}"
+                </p>
+            </div>
+
+            <p class="text-xs text-amber-400/70 text-right mt-6">Con mucho cariño 🌻</p>
+
+            <div class="mt-6 pt-4 border-t border-slate-800 flex justify-end">
+                <button id="btn-modal-ok" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold text-sm hover:brightness-110 transition-all shadow-lg shadow-amber-500/20">
+                    Guardar con amor
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    import confetti from 'canvas-confetti';
+
+    // --- 1. LÓGICA DEL CANVAS: PARTICULAS Y PÉTALOS VOLANTES ---
+    const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement;
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+        if (!canvas) return;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    interface Particle {
+        x: number;
+        y: number;
+        size: number;
+        speedY: number;
+        speedX: number;
+        rotation: number;
+        rotationSpeed: number;
+        opacity: number;
+        type: 'petal' | 'sparkle';
+    }
+
+    const particles: Particle[] = [];
+    const particleCount = 45;
+
+    function createParticles() {
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                size: Math.random() * (i % 3 === 0 ? 8 : 3) + 2,
+                speedY: Math.random() * 0.8 + 0.3,
+                speedX: (Math.random() - 0.5) * 0.5,
+                rotation: Math.random() * Math.PI * 2,
+                rotationSpeed: (Math.random() - 0.5) * 0.03,
+                opacity: Math.random() * 0.7 + 0.3,
+                type: i % 3 === 0 ? 'petal' : 'sparkle'
+            });
+        }
+    }
+
+    function drawPetal(p: Particle) {
+        if (!ctx) return;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.globalAlpha = p.opacity;
+
+        // Pétalo de girasol
+        ctx.fillStyle = '#facc15';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size, p.size * 2, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Detalle sombra del pétalo
+        ctx.fillStyle = '#eab308';
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size / 2, p.size, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    function drawSparkle(p: Particle) {
+        if (!ctx) return;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.globalAlpha = p.opacity;
+        ctx.fillStyle = '#fef08a';
+
+        ctx.beginPath();
+        ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function animateCanvas() {
+        if (!ctx || !canvas) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach((p) => {
+            p.y += p.speedY;
+            p.x += Math.sin(p.y * 0.01) * 0.4;
+            p.rotation += p.rotationSpeed;
+
+            if (p.y > canvas.height + 20) {
+                p.y = -20;
+                p.x = Math.random() * canvas.width;
+            }
+
+            if (p.type === 'petal') {
+                drawPetal(p);
+            } else {
+                drawSparkle(p);
+            }
+        });
+
+        requestAnimationFrame(animateCanvas);
+    }
+
+    createParticles();
+    animateCanvas();
+
+    // --- 2. INTERACCIONES DE USUARIO & CONFETTI DE PÉTALOS ---
+    function triggerPetalBurst(x = 0.5, y = 0.5) {
+        confetti({
+            particleCount: 40,
+            spread: 70,
+            origin: { x, y },
+            colors: ['#facc15', '#fde047', '#eab308', '#ca8a04'],
+            shapes: ['circle'],
+            scalar: 1.2,
+            ticks: 200
+        });
+    }
+
+    const bouquetContainer = document.getElementById('bouquet-container');
+    bouquetContainer?.addEventListener('click', (e) => {
+        const rect = bouquetContainer.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        triggerPetalBurst(e.clientX / window.innerWidth, e.clientY / window.innerHeight);
+    });
+
+    const btnSpawnPetals = document.getElementById('btn-spawn-petals');
+    btnSpawnPetals?.addEventListener('click', () => {
+        triggerPetalBurst(0.5, 0.6);
+    });
+
+    // --- 3. MANEJO DEL MODAL DE LA TARJETA ---
+    const btnCard = document.getElementById('btn-card');
+    const cardModal = document.getElementById('card-modal');
+    const cardModalContent = document.getElementById('card-modal-content');
+    const btnCloseCard = document.getElementById('btn-close-card');
+    const btnModalOk = document.getElementById('btn-modal-ok');
+
+    function openCard() {
+        if (!cardModal || !cardModalContent) return;
+        cardModal.classList.remove('opacity-0', 'pointer-events-none');
+        cardModalContent.classList.remove('scale-90');
+        cardModalContent.classList.add('scale-100');
+        triggerPetalBurst(0.5, 0.4);
+    }
+
+    function closeCard() {
+        if (!cardModal || !cardModalContent) return;
+        cardModal.classList.add('opacity-0', 'pointer-events-none');
+        cardModalContent.classList.remove('scale-100');
+        cardModalContent.classList.add('scale-90');
+    }
+
+    btnCard?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openCard();
+    });
+
+    btnCloseCard?.addEventListener('click', closeCard);
+    btnModalOk?.addEventListener('click', closeCard);
+    cardModal?.addEventListener('click', (e) => {
+        if (e.target === cardModal) closeCard();
+    });
+
+    // --- 4. EDICIÓN DINÁMICA DE NOMBRE ---
+    const btnEditName = document.getElementById('btn-edit-name');
+    const recipientName = document.getElementById('recipient-name');
+    const cardTitle = document.getElementById('card-title');
+
+    btnEditName?.addEventListener('click', () => {
+        const newName = prompt('¿Para quién es este ramo de flores amarillas?', recipientName?.innerText);
+        if (newName && newName.trim() !== '') {
+            if (recipientName) recipientName.innerText = newName;
+            if (cardTitle) cardTitle.innerText = newName;
+        }
+    });
+</script>
