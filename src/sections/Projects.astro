@@ -16,34 +16,47 @@ const PROYECTOS = [
     title: "Korekenke — Sistema de Gestión y Convenios",
     entity: "JBIENE - Ejército del Perú",
     description:
-      "Plataforma web empresarial desarrollada para la digitalización integral de solicitudes de convenios y descuentos corporativos. Permite la gestión centralizada de trámites sin atención presencial e integra alertas automatizadas.",
+        "Plataforma web desarrollada para digitalizar las solicitudes de convenios y códigos de descuento, evitando trámites presenciales a miles de usuarios y adultos mayores.",
     image: "/projects/korekenke.png",
     tags: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
     highlights: [
-      "Digitalización completa de procesos y trámites presenciales para miles de usuarios.",
-      "Integración de sistema de notificaciones omnicanal vía Email y WhatsApp.",
-      "Módulos de administración para control de roles, permisos y accesos.",
+      "Digitalización de trámites presenciales con una interfaz accesible y fácil de usar.",
+      "Integración de notificaciones automáticas por correo electrónico y WhatsApp.",
+      "Módulos administrativos para el control de roles, permisos, accesos y asistencias.",
     ],
   },
   {
-    title: "Platform Servitec — Hub Corporativo Centralizado",
+    title: "Platform Servitec — Sistema de Gestión Corporativa",
     entity: "Servitec Peru Group E.I.R.L.",
     description:
-      "Ecosistema web diseñado para consolidar e interconectar interacciones de usuarios desde múltiples sitios web corporativos en una sola interfaz en tiempo real.",
+        "Sistema web diseñado para centralizar en una sola bandeja las interacciones provenientes de múltiples sitios web de clientes y agilizar la operación interna.",
     image: "/projects/platform-servitec.png",
     tags: ["React", "Tailwind CSS", "Node.js"],
     highlights: [
-      "Centralización de formularios de contacto, cotizaciones y libro de reclamaciones.",
-      "Módulo interno de control de asistencias y gestión de proveedores.",
-      "Refactorización del código base, mejorando la velocidad de carga y el UI/UX.",
+      "Centralización de formularios de contacto y libros de reclamaciones con respuesta directa por correo.",
+      "Módulos internos para gestión de cotizaciones, proveedores, asistencias y permisos.",
+      "Refactorización del código base, mejorando la velocidad de carga y la experiencia UI/UX.",
+    ],
+  },
+  {
+    title: "IM Shop — Plataforma E-commerce de Recargas Digitales",
+    entity: "IM Shop • imshop.games",
+    description:
+        "Tienda online para la compra y recarga de diamantes y pases de Free Fire, con flujo de pago mediante código QR de Yape, panel administrativo de validación y entrega automatizada.",
+    image: "/projects/imshop-games.png",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Supabase"],
+    highlights: [
+      "Flujo de compra con pago mediante código QR de Yape y panel admin para validar y aprobar pedidos.",
+      "Validación de jugadores y conexión con APIs de proveedores externos para el envío de recargas.",
+      "Envío de correos transaccionales con Resend y gestión de órdenes y usuarios en Supabase.",
     ],
   },
 ];
 ---
 
 <section
-  id="proyectos"
-  class="py-16 md:py-24 border-t border-neutral-200 dark:border-neutral-900"
+    id="proyectos"
+    class="py-16 md:py-24 border-t border-neutral-200 dark:border-neutral-900"
 >
   <ContentWidth>
     <div class="max-w-3xl space-y-12">
@@ -52,73 +65,73 @@ const PROYECTOS = [
           Proyectos Destacados
         </h2>
         <p class="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base">
-          Sistemas empresariales desarrollados con enfoque en rendimiento,
-          arquitectura limpia y usabilidad.
+          Aplicaciones web y sistemas desarrollados con enfoque en rendimiento,
+          código limpio y usabilidad.
         </p>
       </div>
 
       <div class="space-y-16">
         {PROYECTOS.map((project) => (
-          <article class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start pt-8 border-t border-neutral-200 dark:border-neutral-900 first:border-t-0 first:pt-0">
-            <div class="md:col-span-5 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800/60 aspect-video md:aspect-[4/3] flex items-center justify-center">
-              <img
-                src={project.image}
-                alt={`Captura de ${project.title}`}
-                class="w-full h-full object-cover"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-              />
-              <div class="hidden w-full h-full p-6 flex-col justify-between bg-neutral-50 dark:bg-neutral-950">
+            <article class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-start pt-8 border-t border-neutral-200 dark:border-neutral-900 first:border-t-0 first:pt-0">
+              <div class="md:col-span-5 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800/60 aspect-video md:aspect-[4/3] flex items-center justify-center">
+                <img
+                    src={project.image}
+                    alt={`Captura de ${project.title}`}
+                    class="w-full h-full object-cover"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="hidden w-full h-full p-6 flex-col justify-between bg-neutral-50 dark:bg-neutral-950">
                 <span class="text-xs font-semibold text-brand-red uppercase tracking-wider">
                   {project.entity}
                 </span>
-                <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-300">
-                  {project.title}
-                </p>
+                  <p class="text-sm font-semibold text-neutral-800 dark:text-neutral-300">
+                    {project.title}
+                  </p>
+                </div>
               </div>
-            </div>
 
-            <div class="md:col-span-7 space-y-4">
-              <div>
+              <div class="md:col-span-7 space-y-4">
+                <div>
                 <span class="text-xs font-semibold text-brand-red uppercase tracking-wide">
                   {project.entity}
                 </span>
-                <h3 class="text-xl font-bold text-neutral-900 dark:text-white leading-snug mt-1">
-                  {project.title}
-                </h3>
-              </div>
+                  <h3 class="text-xl font-bold text-neutral-900 dark:text-white leading-snug mt-1">
+                    {project.title}
+                  </h3>
+                </div>
 
-              <p class="text-neutral-700 dark:text-neutral-300 text-sm sm:text-base leading-relaxed">
-                {project.description}
-              </p>
+                <p class="text-neutral-700 dark:text-neutral-300 text-sm sm:text-base leading-relaxed">
+                  {project.description}
+                </p>
 
-              <ul class="space-y-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
-                {project.highlights.map((highlight) => (
-                  <li class="flex items-start gap-2.5">
-                    <CodeXml class="w-4 h-4 text-neutral-400 dark:text-neutral-500 shrink-0 mt-0.5" />
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul class="space-y-2 text-xs sm:text-sm text-neutral-700 dark:text-neutral-300">
+                  {project.highlights.map((highlight) => (
+                      <li class="flex items-start gap-2.5">
+                        <CodeXml class="w-4 h-4 text-neutral-400 dark:text-neutral-500 shrink-0 mt-0.5" />
+                        <span>{highlight}</span>
+                      </li>
+                  ))}
+                </ul>
 
-              <div class="flex flex-wrap gap-2 pt-2">
-                {project.tags.map((tag) => {
-                  const iconPath = TAG_ICONS[tag];
-                  return (
-                    <span class="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-900 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800/90 shadow-sm">
+                <div class="flex flex-wrap gap-2 pt-2">
+                  {project.tags.map((tag) => {
+                    const iconPath = TAG_ICONS[tag];
+                    return (
+                        <span class="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 dark:text-neutral-300 bg-neutral-100 dark:bg-neutral-900 px-3 py-1 rounded-full border border-neutral-200 dark:border-neutral-800/90 shadow-sm">
                       {iconPath && (
-                        <img
-                          src={iconPath}
-                          alt={`Icono de ${tag}`}
-                          class="w-3.5 h-3.5 object-contain"
-                        />
+                          <img
+                              src={iconPath}
+                              alt={`Icono de ${tag}`}
+                              class="w-3.5 h-3.5 object-contain"
+                          />
                       )}
-                      <span>{tag}</span>
+                          <span>{tag}</span>
                     </span>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
         ))}
       </div>
     </div>
